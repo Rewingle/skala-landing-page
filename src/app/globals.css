@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@theme {
+  --color-linen: #f4efe8;
+  --color-sand: #e7ded2;
+  --color-stone: #d6cbbe;
+  --color-ivory: #fbf8f3;
+  --color-espresso: #2b2420;
+  --color-ink: #1e1916;
+  --color-muted: #6b6058;
+  --color-terracotta: #9a5b3c;
+  --color-clay: #c9a58c;
+
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument-serif), ui-serif, Georgia, serif;
+}
+
+:root {
+  /* Horizontal page gutter, shared by .shell and full-bleed tracks. */
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --shell: 80rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background-color: var(--color-linen);
+    color: var(--color-espresso);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: var(--color-terracotta);
+    color: var(--color-ivory);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-terracotta);
+    outline-offset: 3px;
+  }
+}
+
+/* Centred content column with the page gutter. */
+@utility shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Padding that lines a full-width track up with the .shell content edge. */
+@utility bleed-x {
+  padding-inline: max(var(--gutter), calc((100% - var(--shell)) / 2 + var(--gutter)));
+  scroll-padding-inline: max(var(--gutter), calc((100% - var(--shell)) / 2 + var(--gutter)));
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
